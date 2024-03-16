@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Slab:ital,wght@0,100..700;1,100..700&family=Tilt+Neon&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+   
+}
+.body{
+    background: url(../background1.jpg);
+    min-height: 100vh;
+    background-size: 100vw 100vh;
+    background-repeat: no-repeat;
+    display: flex ;
+    justify-content: center;
+    align-items: center;
+    gap:2rem;
+}
+.body h1{
+
+    margin-top: -500px;
+    /* font-weight: bold; */
+    font-family: "Josefin Slab", serif;
+    /* font-family: "Tilt Neon", sans-serif; */
+    font-size: 2.6rem;
+    color: rgb(18, 3, 150);
+    text-shadow: 0px 0.5px white;
+    border-bottom:2px solid #7CB31A;
+
+}
+.board{
+    background: linear-gradient(45deg,rgb(218, 232, 238),rgb(125, 201, 249));
+    height: 80vh;
+    width: 40vw;
+    border: 3px double aliceblue;
+    display: grid;
+    grid-template-rows: repeat(18,1fr);
+    grid-template-columns: repeat(18,1fr);
+   
+}
+
+.head{
+    background-color: blueviolet;
+}
+.snake{
+    background-color: beige;
+}
+.food{
+    background-color: rgb(235, 81, 81);
+}
