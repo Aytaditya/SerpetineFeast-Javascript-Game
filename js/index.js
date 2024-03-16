@@ -3,14 +3,16 @@ let inputDir = { x: 0, y: 0 };
 let foodSound = new Audio("munching.mp3")
 let gameOverSound = new Audio("ending.mp3")
 let moveSound = new Audio("moving.mp3")
-let speed = 5;
-let score=0;
+let speed = 3;
+let score = 0;
 let lastPaintTime = 0;
 // Snake Array 
 let snakeArr = [
     { x: 13, y: 15 }
 
 ]
+let heading=document.getElementById("heading");
+let recordScore=document.getElementById("score");
 
 // food will not be an array
 let food = { x: 7, y: 7 }
@@ -40,8 +42,24 @@ function main(ctime) {
 
 }
 
-function isCollide(sarr){
-    return false;
+// when snake collides function
+function isCollide(snake) {
+    for (let i = 1; i < snake.length; i++) {
+
+        // snake got bumped 
+        if (snake[i].x === snake[0].x && snake[i].y === snake[0].y) {
+            return true;
+        }
+
+    }
+    //snake got out of the grid
+    if (snake[0].x >= 18 || snake[0].x <= 0 || snake[0].y >= 18 || snake[0].y <= 0) {
+        
+        return true;
+        
+    }
+
+
 
 }
 
@@ -49,48 +67,61 @@ function gameEngine() {
     // Part1: updating snake and food
 
 
-    if(isCollide(snakeArr)){
+    if (isCollide(snakeArr)) {
         gameOverSound.play();
-        inputDir={x:0,y:0};
+        inputDir = { x: 0, y: 0 };
         alert("Game Over Press any Key to Play Again")
         //Reseting Snake Array
-         snakeArr = [
+        snakeArr = [
             { x: 13, y: 15 }
-        
+
         ]
-        score=0;
+        score = 0;
+        speed=3;
+        recordScore.innerHTML="Score:"+score;
     }
 
-          //  is food eaten increment score and regenerate food
-              // this means is head position is equal to food positin then
-              if (snakeArr[0].y === food.y && snakeArr[0].x === food.x) {
-                foodSound.play();
-                snakeArr.unshift({ x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y });
-                 // snakeBody.unshift() adds a new element to the beginning of the snakeArr array.
-            
-                // Generating a random number between a to b formula
-                let a = 1;
-                let b = 17;
-                food = { x: Math.round(a + (b - a) * Math.random()), y: Math.round(a + (b - a) * Math.random()) };
-            }
-            
+    //  is food eaten increment score and regenerate food
+    // this means is head position is equal to food positin then
+    if (snakeArr[0].y === food.y && snakeArr[0].x === food.x) {
+        foodSound.play();
+        score=score+1;
+       
+       if(speed<10){
+        speed=speed+1;
+        console.log(speed);
+       }
+       
+        
+        recordScore.innerHTML="Score:"+score;
+        
+        snakeArr.unshift({ x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y });
+        // snakeBody.unshift() adds a new element to the beginning of the snakeArr array.
 
-          // moving snake
-          for(let i=snakeArr.length-2;i>=0;i--){
+        // Generating a random number between a to b formula
+        let a = 1;
+        let b = 16;
 
-            // to make a new object with same properties
-            snakeArr[i+1]={...snakeArr[i]}
+        food = { x: Math.round(a + (b - a) * Math.random()), y: Math.round(a + (b - a) * Math.random()) };
+    }
 
 
-          }
-          snakeArr[0].x=snakeArr[0].x+inputDir.x;
-          snakeArr[0].y=snakeArr[0].y+inputDir.y;
+    // moving snake
+    for (let i = snakeArr.length - 2; i >= 0; i--) {
+
+        // to make a new object with same properties
+        snakeArr[i + 1] = { ...snakeArr[i] }
+
+
+    }
+    snakeArr[0].x = snakeArr[0].x + inputDir.x;
+    snakeArr[0].y = snakeArr[0].y + inputDir.y;
 
 
 
     // Part2: Display food and snake
 
-                   // Displaying Snake Head at start
+    // Displaying Snake Head at start
     board.innerHTML = "";
     snakeArr.forEach((e, index) => {
         let snakeElement = document.createElement('div');
@@ -119,7 +150,7 @@ function gameEngine() {
 
 
 
-                                  //Main logic
+//Main logic
 
 // this will fire main function once
 window.requestAnimationFrame(main);
@@ -132,20 +163,20 @@ window.addEventListener('keydown', e => {
     // now we will detect which key is pressed
     switch (e.key) {
         case "ArrowUp":
-            inputDir.x= 0;
-            inputDir.y= -1;
+            inputDir.x = 0;
+            inputDir.y = -1;
             break;
         case "ArrowDown":
-            inputDir.x= 0;
-            inputDir.y= 1;
+            inputDir.x = 0;
+            inputDir.y = 1;
             break;
         case "ArrowLeft":
-            inputDir.x= -1;
-            inputDir.y= 0;
+            inputDir.x = -1;
+            inputDir.y = 0;
             break;
         case "ArrowRight":
-            inputDir.x= 1;
-            inputDir.y= 0;
+            inputDir.x = 1;
+            inputDir.y = 0;
             break;
         default:
             break;
