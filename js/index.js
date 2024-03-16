@@ -3,7 +3,7 @@ let inputDir = { x: 0, y: 0 };
 let foodSound = new Audio("munching.mp3")
 let gameOverSound = new Audio("ending.mp3")
 let moveSound = new Audio("moving.mp3")
-let speed = 2;
+let speed = 5;
 let score=0;
 let lastPaintTime = 0;
 // Snake Array 
@@ -30,6 +30,7 @@ function main(ctime) {
 
 
     //managing frames per second
+    // we will change this to increase the speed of snake
     if ((ctime - lastPaintTime) / 1000 < 1 / speed) {
         return;
 
@@ -46,12 +47,14 @@ function isCollide(sarr){
 
 function gameEngine() {
     // Part1: updating snake and food
+
+
     if(isCollide(snakeArr)){
         gameOverSound.play();
         inputDir={x:0,y:0};
         alert("Game Over Press any Key to Play Again")
         //Reseting Snake Array
-        let snakeArr = [
+         snakeArr = [
             { x: 13, y: 15 }
         
         ]
@@ -60,15 +63,29 @@ function gameEngine() {
 
           //  is food eaten increment score and regenerate food
               // this means is head position is equal to food positin then
-          if(snakeArr[0].y===food.y && snakeArr[0].x===food.x){
-            snakeArr.unshift({x:snakeArr[0].x+inputDir.x,y:snakeArr[0].y+inputDir.y})
-            // snakeBody.unshift() adds a new element to the beginning of the snakeArr array.
+              if (snakeArr[0].y === food.y && snakeArr[0].x === food.x) {
+                foodSound.play();
+                snakeArr.unshift({ x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y });
+                 // snakeBody.unshift() adds a new element to the beginning of the snakeArr array.
+            
+                // Generating a random number between a to b formula
+                let a = 1;
+                let b = 17;
+                food = { x: Math.round(a + (b - a) * Math.random()), y: Math.round(a + (b - a) * Math.random()) };
+            }
+            
 
-            // Generating a random number between a to b formula
-            let a=0;
-            let b=18;
-            food={x:Math.round(a+(b-a)*Math.random),y:Math.round(a+(b-a)*Math.random)}
+          // moving snake
+          for(let i=snakeArr.length-2;i>=0;i--){
+
+            // to make a new object with same properties
+            snakeArr[i+1]={...snakeArr[i]}
+
+
           }
+          snakeArr[0].x=snakeArr[0].x+inputDir.x;
+          snakeArr[0].y=snakeArr[0].y+inputDir.y;
+
 
 
     // Part2: Display food and snake
@@ -102,7 +119,7 @@ function gameEngine() {
 
 
 
-//Main logic
+                                  //Main logic
 
 // this will fire main function once
 window.requestAnimationFrame(main);

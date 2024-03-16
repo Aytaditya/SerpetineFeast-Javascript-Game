@@ -42,8 +42,12 @@
     background-color: blueviolet;
 }
 .snake{
-    background-color: beige;
+    background-color: rgb(249, 251, 124);
+    
 }
 .food{
-    background-color: rgb(235, 81, 81);
+    background-color: rgb(242, 164, 164);
+    border: 1px solid white;
+    border-radius: 4px;
+    
 }
