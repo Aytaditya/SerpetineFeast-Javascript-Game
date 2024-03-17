@@ -71,7 +71,7 @@ function gameEngine() {
     if (isCollide(snakeArr)) {
         gameOverSound.play();
         inputDir = { x: 0, y: 0 };
-        alert("Game Over Press any Key to Play Again")
+        alert("Game Over!!!!!")
         //Reseting Snake Array
         snakeArr = [
             { x: 13, y: 15 }
