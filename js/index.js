@@ -13,6 +13,7 @@ let snakeArr = [
 ]
 let heading=document.getElementById("heading");
 let recordScore=document.getElementById("score");
+let highScore=document.getElementById("highScore");
 
 // food will not be an array
 let food = { x: 7, y: 7 }
@@ -91,6 +92,13 @@ function gameEngine() {
         speed=speed+1;
         console.log(speed);
        }
+
+       if(score>highscoreval){
+        highscoreval=score;
+        localStorage.setItem("highscore",JSON.stringify(highscoreval))
+        highScore.innerHTML="High Score:"+highscoreval;
+       }
+
        
         
         recordScore.innerHTML="Score:"+score;
@@ -151,6 +159,20 @@ function gameEngine() {
 
 
 //Main logic
+
+let highscore=localStorage.getItem("highscore");
+if(highscore===null){
+    //JSON.stringify() is a method in JavaScript that converts a JavaScript object or value to a JSON string.
+    var highscoreval=0;
+    localStorage.setItem("highscore",JSON.stringify(highscoreval))
+}
+else{
+    highscoreval=JSON.parse(highscore);
+    highScore.innerHTML="High Score:"+highscoreval;
+
+}
+
+
 
 // this will fire main function once
 window.requestAnimationFrame(main);

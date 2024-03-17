@@ -26,7 +26,6 @@
     color: rgb(18, 3, 150);
     text-shadow: 0px 0.5px white;
     border-bottom:2px solid #7CB31A;
-
 }
 .board{
     background: linear-gradient(45deg,rgb(218, 232, 238),rgb(125, 201, 249));
@@ -36,36 +35,31 @@
     display: grid;
     grid-template-rows: repeat(18,1fr);
     grid-template-columns: repeat(18,1fr);
-   
 }
-
 .head{
     background-color: blueviolet;
     border-radius: 4px;
     transform: scale(1.02);
-
 }
 .snake{
     background-color: beige;
-    
+   
 }
-
 .food{
     background-color: rgb(242, 164, 164);
     border: 1px solid white;
     border-radius: 7px;
-    box-shadow: 7px 8px 37px 9px rgba(255,255,255,1);
-    
+    box-shadow: 7px 8px 37px 9px rgba(255,255,255,1); 
 }
-
 .body h2{
     margin-bottom:60vh;
     margin-left:-150px ;
     font-family: "New Tegomin", serif;
+    font-size: 1.7rem;
 }
 .change{
     margin-bottom:50vh;
     margin-left:-140px ;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-family: "New Tegomin", serif;
 }
